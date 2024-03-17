@@ -1,0 +1,12 @@
+.loading-block {
+  background-color: #0a0a0a;
+  display: flex;
+  justify-content: center;
+  &__inner {
+    margin-top: 45px;
+  }
+  &__text {
+    color: white;
+    font-size: 25px;
+  }
+}

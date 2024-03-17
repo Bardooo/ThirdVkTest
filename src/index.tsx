@@ -1,7 +1,23 @@
-import ReactDOM from 'react-dom/client';
+import * as React from 'react';
+import { createRoot } from 'react-dom/client';
+import {
+  AdaptivityProvider,
+  ConfigProvider,
+} from '@vkontakte/vkui';
+import '@vkontakte/vkui/dist/vkui.css';
 import App from './App';
+// import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container!);
 root.render(
-  <App />
+  <ConfigProvider>
+    <AdaptivityProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </AdaptivityProvider>
+  </ConfigProvider>,
 );
