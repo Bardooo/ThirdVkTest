@@ -19,6 +19,7 @@ import {
 } from '@vkontakte/vkui';
 import ErrorBlock from './components/ErrorBlock';
 import LoadingBlock from './components/LoadingBlock';
+import EmptyCart from './components/EmptyCart';
 
 export type ItemType = {
   id: string;
@@ -43,37 +44,41 @@ const App = () => {
   } else if (status === 'loading') {
     return <LoadingBlock />
   } else {
-    return (
-      <AppRoot>
-        <SplitLayout header={platform !== 'vkcom' && <PanelHeader delimiter="none" />}>
-          <SplitCol autoSpaced>
-            <View activePanel="main">
-              <Panel id="main">
-                <PanelHeader>Корзина</PanelHeader>
-                <div className="main">
-                  <Group className="left" header={<Header mode="secondary">Товары</Header>}>
-                    <div className="cart-items">
-                      {items.map((item: ItemType) => (
-                        <CartItem key={item.id} {...item} />
-                      ))}
-                    </div>
-                  </Group>
-                  <Group className="right" header={<Header mode="secondary">Итог</Header>}>
-                    <div className="cart-total">
-                      <div className="cart-total__inner">
-                        <p className="cart-total__top">
-                          Итого <span>{totalPrice} ₽</span>
-                        </p>
+    if (totalPrice === 0) {
+      return <EmptyCart/>
+    } else {
+      return (
+        <AppRoot>
+          <SplitLayout header={platform !== 'vkcom' && <PanelHeader delimiter="none" />}>
+            <SplitCol autoSpaced>
+              <View activePanel="main">
+                <Panel id="main">
+                  <PanelHeader>Корзина</PanelHeader>
+                  <div className="main">
+                    <Group className="left" header={<Header mode="secondary">Товары</Header>}>
+                      <div className="cart-items">
+                        {items.map((item: ItemType) => (
+                          <CartItem key={item.id} {...item} />
+                        ))}
                       </div>
-                    </div>
-                  </Group>
-                </div>
-              </Panel>
-            </View>
-          </SplitCol>
-        </SplitLayout>
-      </AppRoot>
-    );
+                    </Group>
+                    <Group className="right" header={<Header mode="secondary">Итог</Header>}>
+                      <div className="cart-total">
+                        <div className="cart-total__inner">
+                          <p className="cart-total__top">
+                            Итого <span>{totalPrice} ₽</span>
+                          </p>
+                        </div>
+                      </div>
+                    </Group>
+                  </div>
+                </Panel>
+              </View>
+            </SplitCol>
+          </SplitLayout>
+        </AppRoot>
+      );
+    }
   }
 };
 
