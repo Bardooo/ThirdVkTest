@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import {
-  AdaptivityProvider,
-  ConfigProvider,
-} from '@vkontakte/vkui';
+import { AdaptivityProvider, ConfigProvider } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import App from './App';
 import { Provider } from 'react-redux';
